@@ -22,9 +22,12 @@ const Hero = () => {
 
       // Animate the image out
       gsap.to("#img", {
-        opacity: 0,
+       
         y: -50,
-        duration: 0.5,
+        x:1000,
+        duration:3,
+        ease: 'power1.inOut',
+        rotate:-160,
         onComplete: () => {
           // Update the image after the fade-out
           setBigShoeImg(newImg);
@@ -41,11 +44,14 @@ const Hero = () => {
         opacity: 1,
         y: 50,
         rotate:0,
+        x:1100,
+        ease:'back.in'
       }, {
         zIndex:10,
         opacity: 1,
         y: 0,
         duration: 4,
+        x:0,
         ease: 'power1.inOut',
         rotate:360,
         
