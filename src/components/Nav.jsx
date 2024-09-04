@@ -2,10 +2,26 @@
 import {headerLogo} from "../assets/images"
 import {hamburger} from "../assets/icons"
 import {navLinks} from "../constants"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 
 const Nav = () => {
+
+  useGSAP(()=>{
+    gsap.fromTo('#header',{
+      y:-100,
+
+    },{
+      y:0,
+      ease:'elastic',
+      duration:3,
+      delay:4,
+      opacity:1
+    })
+
+  })
   return (
-    <header className="padding-x py-8 absolute z-10 w-full ">
+    <header id="header" className="padding-x py-8 absolute z-10 w-full opacity-0 ">
       <nav className="flex justify-between items-center max-container">
         <a href="/">
         <img src={headerLogo} alt="Logo" width={130} height={29} />
