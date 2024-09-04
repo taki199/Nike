@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import { shoes, statistics } from "../constants";
 
@@ -7,9 +7,76 @@ import ShoeCard from '../components/ShoeCard'
 import { bigShoe1 } from "../assets/images";
 import { arrowRight } from "../assets/icons";
 import Button from "../components/Button";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Hero = () => {
   const [bigShoeImg, setBigShoeImg] = useState(bigShoe1);
+
+
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const changeBigShoeImage = (newImg) => {
+    if (bigShoeImg !== newImg) {
+      setIsAnimating(true);
+
+      // Animate the image out
+      gsap.to("#img", {
+        opacity: 0,
+        y: -50,
+        duration: 0.5,
+        onComplete: () => {
+          // Update the image after the fade-out
+          setBigShoeImg(newImg);
+          setIsAnimating(false);
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!isAnimating) {
+      // Animate the new image in
+      gsap.fromTo("#img", {
+        opacity: 0,
+        y: 50,
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power1.inOut',
+      });
+    }
+  }, [bigShoeImg, isAnimating]);
+
+  
+
+
+  useGSAP(()=>{
+   gsap.fromTo('#title',{
+    x: -200,
+   },{
+    ease:'power1.inOut',
+    delay:3,
+    zIndex:10,
+    opacity:1,
+    duration:4,
+    x:50
+   },
+  gsap.fromTo('#para',{
+    x:-100,
+    
+  },{
+    x:0,
+    duration:4,
+    delay:2,
+    ease:'elastic',
+    opacity:1
+  },
+
+))
+  },[])
+  
 
   return (
     <section
@@ -21,14 +88,14 @@ const Hero = () => {
           Our Summer collections
         </p>
 
-        <h1 className='mt-10 font-palanquin text-8xl max-sm:text-[72px] max-sm:leading-[82px] font-bold'>
+        <h1 id="title"  className='mt-10 font-palanquin text-8xl max-sm:text-[72px] max-sm:leading-[82px] font-bold opacity-0'>
           <span className='xl:bg-white xl:whitespace-nowrap relative z-10 pr-10'>
             The New Arrival
           </span>
           <br />
-          <span className='text-coral-red inline-block mt-3'>Nike</span> Shoes
+          <span  className='text-coral-red inline-block mt-3'>Nike</span> Shoes
         </h1>
-        <p className='font-montserrat text-slate-gray text-lg leading-8 mt-6 mb-14 sm:max-w-sm'>
+        <p id="para" className='font-montserrat text-slate-gray text-lg leading-8 mt-6 mb-14 sm:max-w-sm opacity-0'>
           Discover stylish Nike arrivals, quality comfort, and innovation for
           your active life.
         </p>
@@ -49,11 +116,12 @@ const Hero = () => {
 
       <div className='relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-hero bg-cover bg-center'>
         <img
+          id="img"
           src={bigShoeImg}
           alt='shoe colletion'
           width={610}
           height={502}
-          className='object-contain relative z-10 animate-bounce'
+          className='object-contain relative z-10 opacity-0 '
         />
 
         <div className='flex sm:gap-6 gap-4 absolute -bottom-[5%] sm:left-[10%] max-sm:px-6'>
@@ -62,7 +130,7 @@ const Hero = () => {
               <ShoeCard
                 index={index}
                 imgURL={image}
-                changeBigShoeImage={(shoe) => setBigShoeImg(shoe)}
+                changeBigShoeImage={changeBigShoeImage}
                 bigShoeImg={bigShoeImg}
               />
             </div>
