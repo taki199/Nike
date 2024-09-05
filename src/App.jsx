@@ -9,6 +9,8 @@ import {
   SuperQuality,
 } from "./sections";
 import Nav from "./components/Nav";
+import { SpeedInsights } from '@vercel/speed-insights/react';
+
 const App = () => {
   return (
     <main className='relative'>
@@ -37,6 +39,7 @@ const App = () => {
       <section className=' bg-black padding-x padding-t pb-8'>
         <Footer />
       </section>
+      <SpeedInsights />
     </main>
   );
 };
