@@ -38,19 +38,21 @@ const SuperQuality = () => {
 
     gsap.fromTo(element,{
       y:-500,
-      opacity:0  
+      opacity:0,
+      scale:0,
+
     },{
       y:0,
       delay:3,
       duration:4,
       opacity:1,
+      scale:1,
       ease:'power1.inOut',
       scrollTrigger: {
         trigger: element,
-        
-        scrub: 1,
+        scrub: 2,
         once: true, 
-      },
+      }
      
     })
 

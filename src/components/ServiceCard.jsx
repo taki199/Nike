@@ -17,7 +17,7 @@ const ServiceCard = ({imgURL,label,subtext}) => {
         x:0,
         duration:1.5,
         delay:3,
-        ease:'elastic.inOut',
+        ease:'power1.inOut',
         scrollTrigger:{
             trigger: element,
             once:true,

@@ -36,7 +36,18 @@ const Hero = () => {
       });
     }
   };
-
+  // useGSAP(()=>{
+  //   gsap.fromTo('.bg-hero',{
+  //     opacity:0,
+  //     x:2000
+  //   },{
+  //     opacity:1,
+  //     x:-50,
+  //     duration:8,
+  //     delay:2.5,
+  //     ease:'elastic'
+  //   })  
+  // },[])
   useEffect(() => {
     if (!isAnimating) {
       // Animate the new image in
