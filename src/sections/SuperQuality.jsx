@@ -10,10 +10,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SuperQuality = () => {
   const scrollRef=useRef(null)
+  const scrollLeft=useRef(null)
  
 
   useEffect(()=>{
     const element = scrollRef.current;
+    const el=scrollLeft.current;
+
+
+    gsap.fromTo(el,{
+      x: -500,
+      opacity: 0,
+    },{
+      x:0,
+      opacity:1,
+      delay:5,
+      duration:6,
+     ease:'power1.inOut',
+      scrollTrigger: {
+        trigger: element,
+        
+        scrub: 1,
+        once: true, 
+      },
+
+    })
 
     gsap.fromTo(element,{
       y:-500,
@@ -23,7 +44,7 @@ const SuperQuality = () => {
       delay:3,
       duration:4,
       opacity:1,
-      ease:'elastic.inOut',
+      ease:'power1.inOut',
       scrollTrigger: {
         trigger: element,
         
@@ -34,13 +55,14 @@ const SuperQuality = () => {
     })
 
   },[])
+  
  
   return (
     <section
       id='about-us'
       className='flex justify-between items-center max-lg:flex-col gap-10 w-full max-container'
     >
-      <div className='flex flex-1 flex-col'>
+      <div ref={scrollLeft} className='flex flex-1 flex-col'>
         <h2 className='font-palanquin capitalize text-4xl lg:max-w-lg font-bold'>
           We Provide You
           <span className='text-coral-red'> Super </span>

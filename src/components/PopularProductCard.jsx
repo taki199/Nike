@@ -22,6 +22,7 @@ const PopularProductCard = ({ imgURL, name, price }) => {
         opacity: 1,
         duration: 3,
         delay: 0.5, 
+        ease:'power1.inOut',
         scrollTrigger: {
           trigger: element,
           start: 'top 80%', 
